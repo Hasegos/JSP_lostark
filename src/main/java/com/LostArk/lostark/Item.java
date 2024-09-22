@@ -1,0 +1,13 @@
+package com.LostArk.lostark;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Item {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
+
+    @Column(columnDefinition = "Text" /* 매우 긴 문자 가능*/, nullable = false /* 무조건 입력해야되는 컬럼 */)
+    public String title;
+    public Integer price;
+}
