@@ -3,13 +3,20 @@ package com.LostArk.lostark;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.ZonedDateTime;
 
-@Controller // 서버 기능 추가
+@RestController // 서버 기능 추가
 public class LostArkController {
-    @GetMapping("/") // <-메인페이지 접속시
-    // @ResponseBody 문자 그래도 반환해줌
+    /*
+        템플릿 엔진 사용시!!!
+
+        기존 Controller사용한 곳은 RestController로 바꿔줘야하고
+        GetMapping(경로는 직접 입력)해야된다.
+        아마 템플릿으로 경로가 옮겨가서 인식이 안된듯한다.
+     */
+    @GetMapping("static") // <-메인페이지 접속시
     String hello(){
         return "index.html"; // html 반환
     }
@@ -24,6 +31,6 @@ public class LostArkController {
     @GetMapping("/date")
     @ResponseBody
     String hello3(){
-        return ZonedDateTime.now().toString(); 
+        return ZonedDateTime.now().toString();
     }
 }
