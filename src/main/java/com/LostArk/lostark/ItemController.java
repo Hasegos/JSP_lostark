@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor // repository등록할떄 필요
@@ -74,4 +75,17 @@ public class ItemController {
         // itemRepository.save(item);
         return "redirect:/list";
     }
+    
+    // 유저가 해당 URL를 입력시 해당 값을 가져오는 구조
+    @GetMapping("/detail/{id}" /*{아무문자}*/)
+    String detail(@PathVariable Integer id, Model model){ // 유저가 URL 파라미터에 입력한 값을 가져올 수 있음
+        Optional<Item> result = itemRepository.findById(id.longValue());
+        if(result.isPresent()){ //  있을 떄만           
+            System.out.println(result.get());
+            // Optional 안에있는 자료를 .get()으로 가져오기
+            model.addAttribute("abc", result.get());
+        }
+        return "detail.html";
+    }
 }
+
