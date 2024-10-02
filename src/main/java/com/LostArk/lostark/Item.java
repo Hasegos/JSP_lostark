@@ -19,9 +19,9 @@ public class Item {
     private Item(){
 
     }
-    public Item(String title, Integer price){
+    public Item(String title, String price){
         this.title = title;
-        this.price = price;/* 맵 형태로 받았을 경우Integer.parseInt(price);*/
+        this.price = Integer.parseInt(price);/* 맵 형태로 받았을 경우Integer.parseInt(price);*/
     }
 
     /* getter 함수
