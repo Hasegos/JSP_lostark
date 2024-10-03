@@ -2,6 +2,7 @@ package com.LostArk.lostark;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Map;
 @Entity
 @ToString // Lombok 함수로 Object 한번에 보여줌
 @Getter
+@Setter
 public class Item {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,7 +18,7 @@ public class Item {
     @Column(columnDefinition = "Text" /* 매우 긴 문자 가능*/, nullable = false /* 무조건 입력해야되는 컬럼 */)
     private String title;
     private Integer price;
-    private Item(){
+    public Item(){
 
     }
     public Item(String title, String price){
