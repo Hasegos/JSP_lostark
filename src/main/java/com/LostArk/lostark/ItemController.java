@@ -1,6 +1,8 @@
 package com.LostArk.lostark;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -86,17 +88,33 @@ public class ItemController {
     // 유저가 해당 URL를 입력시 해당 값을 가져오는 구조
     @GetMapping("/detail/{id}" /*{아무문자}*/)
     String detail(@PathVariable Long id, Model model){ // 유저가 URL 파라미터에 입력한 값을 가져올 수 있음
-        Optional<Item> result = itemRepository.findById(id);
-        if(result.isPresent()){ //  있을 떄만           
-            System.out.println(result.get());
-            // Optional 안에있는 자료를 .get()으로 가져오기
-            model.addAttribute("abc", result.get());
-            return "detail.html";
+        //throw new Exception();
+        try  {
+           // throw new Exception("이런 저런에러임");
+            Optional<Item> result = itemRepository.findById(id);
+            if(result.isPresent()){ //  있을 떄만
+                System.out.println(result.get());
+                // Optional 안에있는 자료를 .get()으로 가져오기
+                model.addAttribute("abc", result.get());
+                return "detail.html";
+            }
+            else {
+                return "redirect:/list";
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            // 유저 잘못 : 4xx / 서버 잘못 : 5xx / 정상 : 2xx
+            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body("니잘못임");
+            return  "redirect:/list.html";
         }
-        else {
-            return "redirect:/list";
-        }
-
     }
+    /*
+    모든 API에서 에러발생시 대신 실행해줌
+    @ExceptionHandler(Exception.class)
+    public void handler(){
+        return ResponseEntity.status(400).body("니잘못임");
+    }    
+    */
+
 }
 
