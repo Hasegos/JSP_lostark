@@ -16,6 +16,8 @@
             <!-- @PathVariable 형태로 된 URL 링크를 걸고싶을 때 /{해당 문자}(해당문자 = ${데이터 값})-->
             <a th:text="${i.title}" th:href="@{/detail/{id}(id=${i.id})}" >바지</a>
             <p th:text="${i.price}">7억</p>
+            <!--해당 아이디값으로 이동-->
+            <a th:href="@{/edit/{id}(id=${i.id})}">✏️</a>
         </div>
     </div>
 

@@ -1,5 +1,6 @@
 package com.LostArk.lostark;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class ItemController {
     String list(Model model){
         List<Item> result = itemRepository.findAll(); //List 자료로 가져옴
         //System.out.println(result.get(0).price);
-        System.out.println(result);
+        // System.out.println(result);
         model.addAttribute("items", result);
 
         //var a = new Item();
@@ -115,6 +116,34 @@ public class ItemController {
         return ResponseEntity.status(400).body("니잘못임");
     }    
     */
-
+    // 해당 id값으로 URL 잡기 ex) edit/1 ... 등등
+    @GetMapping("/edit/{id}")
+    String edit(@PathVariable Long id, Model model){
+        Optional<Item> result = itemRepository.findById(id);
+        if(result.isPresent()){
+            // 기존 데이터를 넘겨주기 
+            // -> 그래야 Post할때 기존데이터 값을 가지고 Post가능
+            model.addAttribute("data",result.get());
+            return "edit.html";
+        }
+        else{
+            return  "redirect:/list";
+        }
+    }
+    // 기존 데이터 넘겨준 id 값으로 Post하기 (데이터값을 수정하기위해 )
+    @PostMapping("/edit/{id}")
+    // @PathVariable로 유저로부터 데이터를 받기
+    public String edit2(@PathVariable Long id, String title, Integer price){
+        Optional<Item> result = itemRepository.findById(id);
+        if(result.isPresent()){
+            // 해당 id값에 덮어씌우기(즉, 저장기능) -> JPA에서는 저장기능이 따로 구현되어있지않고
+            // .save()로 해결한다
+            itemService.update(id,title,price);
+            return "redirect:/list";
+        }
+        else{
+            return  "edit.html";
+        }
+    }
 }
 

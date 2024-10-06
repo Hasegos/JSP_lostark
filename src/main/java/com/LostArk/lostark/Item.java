@@ -26,6 +26,7 @@ public class Item {
         this.price = Integer.parseInt(price);/* 맵 형태로 받았을 경우Integer.parseInt(price);*/
     }
 
+
     /* getter 함수
     public String getTitle(){
         return  title;
