@@ -1,4 +1,4 @@
-package com.LostArk.lostark;
+package com.LostArk.lostark.homework;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class homeworkService {
 
-    private  final homeworkItemRepository homeworkItemRepository;
+    private  final com.LostArk.lostark.homework.homeworkItemRepository homeworkItemRepository;
 
     public void savehomework(String 글제목,  String 날짜){
         homeworkItem homeworkItem = new homeworkItem();

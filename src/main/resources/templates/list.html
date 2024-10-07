@@ -18,8 +18,23 @@
             <p th:text="${i.price}">7억</p>
             <!--해당 아이디값으로 이동-->
             <a th:href="@{/edit/{id}(id=${i.id})}">✏️</a>
+            <span onclick="fetch()"></span>
         </div>
     </div>
+
+    <button onclick="fetch()">버튼</button>
+    <!--class 명 btn을 찾아서 제일 첫번쨰꺼를 클릭했을때 이 코드를 실행시켜줘~ 이뜻-->
+<script>
+    document.querySelectorAll('.btn')[0].addEventListener('click', function(){
+        fetch('/test1?name=kim&age=20') /* , {
+
+            method : 'POST',
+            headers : { 'Content-Type' : 'application/json'},
+            body : JSON.stringify({name : 'kim'})
+
+        })*/
+    })
+</script>
 
 <!--<div class="card">
     <img src="https://placehold.co/300">

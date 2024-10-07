@@ -1,11 +1,9 @@
-package com.LostArk.lostark;
+package com.LostArk.lostark.Item;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.Map;
 
 @Entity
 @ToString // Lombok 함수로 Object 한번에 보여줌
@@ -21,6 +19,7 @@ public class Item {
     public Item(){
 
     }
+
     public Item(String title, String price){
         this.title = title;
         this.price = Integer.parseInt(price);/* 맵 형태로 받았을 경우Integer.parseInt(price);*/

@@ -1,16 +1,13 @@
-package com.LostArk.lostark;
+package com.LostArk.lostark.Item;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -133,7 +130,7 @@ public class ItemController {
     // 기존 데이터 넘겨준 id 값으로 Post하기 (데이터값을 수정하기위해 )
     @PostMapping("/edit/{id}")
     // @PathVariable로 유저로부터 데이터를 받기
-    public String edit2(@PathVariable Long id, String title, Integer price){
+    public String edit2(@PathVariable Long id, String title, Integer price) throws Exception {
         Optional<Item> result = itemRepository.findById(id);
         if(result.isPresent()){
             // 해당 id값에 덮어씌우기(즉, 저장기능) -> JPA에서는 저장기능이 따로 구현되어있지않고
@@ -145,5 +142,15 @@ public class ItemController {
             return  "edit.html";
         }
     }
+
+
+
+    @GetMapping("/test1")
+    String test1(@RequestParam String name, Integer age){
+        System.out.println(name + age);
+        return  "redirect:/list";
+
+    }
+
 }
 

@@ -1,6 +1,5 @@
-package com.LostArk.lostark;
+package com.LostArk.lostark.Item;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +16,18 @@ public class ItemService {
         itemRepository.save(item);
     }
 
-    public void update(Long id, String getTitle, Integer getPrice){
+    public void update(Long id, String getTitle, Integer getPrice) throws Exception {
         // 엔티티 복사후 넘겨받은 값들을 set으로 저장하기 이후 save(행렬)
         Item item = new Item();
-        item.setId(id);
-        item.setTitle(getTitle);
-        item.setPrice(getPrice);
-        itemRepository.save(item);
+
+        if(getPrice < 0 || getTitle.length() >100){
+            throw new Exception();
+        }
+        else {
+            item.setId(id);
+            item.setTitle(getTitle);
+            item.setPrice(getPrice);
+            itemRepository.save(item);
+        }
     }
 }

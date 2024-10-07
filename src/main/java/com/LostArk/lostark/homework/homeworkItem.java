@@ -1,4 +1,4 @@
-package com.LostArk.lostark;
+package com.LostArk.lostark.homework;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

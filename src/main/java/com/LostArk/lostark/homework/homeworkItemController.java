@@ -1,4 +1,4 @@
-package com.LostArk.lostark;
+package com.LostArk.lostark.homework;
 
 
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class homeworkItemController {
 
-    private final homeworkItemRepository homeworkItemRepository;
-    private  final  homeworkService homeworkService;
+    private final com.LostArk.lostark.homework.homeworkItemRepository homeworkItemRepository;
+    private  final com.LostArk.lostark.homework.homeworkService homeworkService;
 
     @GetMapping("/homeworklist")
     String homework(Model model){

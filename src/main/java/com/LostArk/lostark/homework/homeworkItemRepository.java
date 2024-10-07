@@ -1,4 +1,4 @@
-package com.LostArk.lostark;
+package com.LostArk.lostark.homework;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

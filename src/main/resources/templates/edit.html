@@ -12,6 +12,8 @@
 <div th:replace="~{ nav.html :: navbar}"></div>
 
 <form method="post" th:action="@{/edit/{id}(id=${data.id})}">
+    <!-- input값으로 id 값 넘겨줘도됨
+    <input name="id" th:value="${data.id}" style="display:none">-->
     <input name="title" th:value="${data.title}">
     <input name="price" th:value="${data.price}">
     <button type="submit">전송</button>
