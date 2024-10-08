@@ -1,13 +1,12 @@
 package com.LostArk.lostark.Item;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -145,10 +144,10 @@ public class ItemController {
 
 
 
-    @GetMapping("/test1")
-    String test1(@RequestParam String name, Integer age){
-        System.out.println(name + age);
-        return  "redirect:/list";
+    @DeleteMapping("/delete")
+    ResponseEntity<String> delete(@RequestParam Long id){
+        itemRepository.deleteById(id);
+        return ResponseEntity.status(200).body("삭제완료");
 
     }
 

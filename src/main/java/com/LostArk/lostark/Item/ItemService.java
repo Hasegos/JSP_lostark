@@ -30,4 +30,11 @@ public class ItemService {
             itemRepository.save(item);
         }
     }
+
+    public void delete(){
+        Item item = new Item();
+
+
+    }
+
 }
