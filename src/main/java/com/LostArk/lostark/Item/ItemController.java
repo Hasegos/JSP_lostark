@@ -2,6 +2,7 @@ package com.LostArk.lostark.Item;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -56,14 +57,15 @@ public class ItemController {
         System.out.println(Price);
         */
 
-        /*   HashMap 사용법
+        // HashMap 사용법
+        /*
         HashMap<Object, Object>test = new HashMap<>();
         test.put("name","kim");
         test.put("age","20");
         System.out.println(test.get("name"));
         */
 
-
+        // 유저로부터 데이터를 넘겨받고 그걸 저장했을때 오류난 이유
         /* var a = new Item(Title.toString(),Price.toString());
 
         오류 발생했던 이유 : 저장 까지는 OK 그 데이터를 가져오는게 문제
@@ -77,7 +79,6 @@ public class ItemController {
         */
 
         itemService.saveItem(title,price);
-
 
         return "redirect:/list";
     }
@@ -105,13 +106,15 @@ public class ItemController {
             return  "redirect:/list.html";
         }
     }
+
+    //모든 API에서 에러발생시 대신 실행해줌
     /*
-    모든 API에서 에러발생시 대신 실행해줌
-    @ExceptionHandler(Exception.class)
-    public void handler(){
-        return ResponseEntity.status(400).body("니잘못임");
-    }    
+        @ExceptionHandler(Exception.class)
+        public void handler(){
+            return ResponseEntity.status(400).body("니잘못임");
+        }
     */
+
     // 해당 id값으로 URL 잡기 ex) edit/1 ... 등등
     @GetMapping("/edit/{id}")
     String edit(@PathVariable Long id, Model model){
@@ -129,7 +132,7 @@ public class ItemController {
     // 기존 데이터 넘겨준 id 값으로 Post하기 (데이터값을 수정하기위해 )
     @PostMapping("/edit/{id}")
     // @PathVariable로 유저로부터 데이터를 받기
-    public String edit2(@PathVariable Long id, String title, Integer price) throws Exception {
+    String edit2(@PathVariable Long id, String title, Integer price) throws Exception {
         Optional<Item> result = itemRepository.findById(id);
         if(result.isPresent()){
             // 해당 id값에 덮어씌우기(즉, 저장기능) -> JPA에서는 저장기능이 따로 구현되어있지않고
@@ -142,14 +145,31 @@ public class ItemController {
         }
     }
 
+    // delete 삭제기능  button에서 바로 받아서하는법
+    /*
+        @DeleteMapping("/delete")
+        ResponseEntity<String> delete(@RequestParam Long id){
+            itemRepository.deleteById(id);
+            return ResponseEntity.status(200).body("삭제완료");
 
+        }
+    */
 
-    @DeleteMapping("/delete")
-    ResponseEntity<String> delete(@RequestParam Long id){
-        itemRepository.deleteById(id);
+    // id값을 입력받아서 삭제기능!
+    @PostMapping("/delete")
+    ResponseEntity<String> delete(@RequestBody Long id){
+        itemService.delete(id);
         return ResponseEntity.status(200).body("삭제완료");
-
     }
+
+
+    @GetMapping("/test2")
+    String test2(){
+        var a = new BCryptPasswordEncoder().encode(" 문자~~");
+        System.out.println(a);
+        return  "redirect:/list";
+    }
+
 
 }
 

@@ -18,26 +18,25 @@
             <p th:text="${i.price}">7억</p>
             <!--해당 아이디값으로 이동-->
             <a th:href="@{/edit/{id}(id=${i.id})}">✏️</a>
-            <button th:onclick="fetch('/delete?id=[[${i.id}]]',{method : 'DELETE'})
-                .then(r => r.text())
-                .then((a) => {
-                    console.loh(a);
-                    location.reload(); <--서버에서 400,500 보내도 요청됨 성공 실패여부는 따로 짜야됨--->
-                })">삭제버튼</button>
+            <!-- 여기서 AJAX fetch()로 기능을 쓸거면 버튼안에다가 다 적어야됨! -->
+            <!-- th 쓰면 타임리프 사용가능 / fetch() 만쓸꺼면 함수로 따로 뺴야됨!! -->
+            <!-- AJAX를 이용해서 데이터를 보낼때는 [[${데이터 명}]] 이런식으로 작성해야됨-->
+            <button id="delete" th:onclick="fetchDelete([[${i.id}]])">삭제버튼</button>
         </div>
     </div>
 
 
     <!--class 명 btn을 찾아서 제일 첫번쨰꺼를 클릭했을때 이 코드를 실행시켜줘~ 이뜻-->
 <script th:inline="javascript" >
-    /*
-    document.querySelectorAll('.btn')[0].addEventListener('click', function(){
-        fetch('/test1?name=kim&age=20') /* , {
+    function fetchDelete(id){
+        fetch('/delete' , {
             method : 'POST',
             headers : { 'Content-Type' : 'application/json'},
-            body : JSON.stringify({name : 'kim'})
-        })*/
-    })*/
+            body : JSON.stringify(id)
+        })
+        .then(r => r.text())
+        .then((data) => console.log(data))
+    }
 </script>
 
 <!--<div class="card">

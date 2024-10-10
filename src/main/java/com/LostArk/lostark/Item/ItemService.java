@@ -31,10 +31,8 @@ public class ItemService {
         }
     }
 
-    public void delete(){
-        Item item = new Item();
-
-
+    public void delete(Long id){
+        itemRepository.deleteById(id);
+        System.out.println(id+ "번호 삭제완료했습니다.");
     }
-
 }
