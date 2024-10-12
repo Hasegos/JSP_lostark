@@ -9,17 +9,13 @@
     <link href="/main.css" rel="stylesheet">
 </head>
 <body>
-
 <div th:replace="~{ nav.html :: navbar}"></div>
-<h4> 로그인 하세요 </h4>
+<h4>회원 가입 페이지</h4>
 
-<div th:if="${param.error}">
-    <h4>아이디나 비번 틀림</h4>
-</div>
-
-<form method="post" action="/login">
-    <input name="username">
-    <input name="password" type="password">
+<form method="post" action="/Register">
+    <input name="displayName"placeholder="이름">
+    <input name="username" placeholder="아이디">
+    <input name="password" type="password" >
     <button type="submit">전송</button>
 </form>
 </body>

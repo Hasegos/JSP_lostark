@@ -26,6 +26,11 @@ public class SecurityConfig {
                 // 밑에 URL permitAll() 는 모든 허용
                 authorize.requestMatchers("/**").permitAll()
         );
+
+        http.formLogin((formLogin) -> formLogin.loginPage("/login")
+                .defaultSuccessUrl("/list")
+        );
+
         return http.build();
     }
 }

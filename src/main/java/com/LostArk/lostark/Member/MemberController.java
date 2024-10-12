@@ -17,13 +17,14 @@ import java.io.PrintWriter;
 public class MemberController {
 
     private final MemberService memberService;
+    private  final  MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping("/login")
-    String login(){
-        return "login.html";
+    @GetMapping("/register")
+    String register(){
+        return "register.html";
     }
-    @PostMapping("/Login")
+    @PostMapping("/Register")
     String Login(String username, String password, String displayName, HttpServletResponse response) throws IOException {
         
         // PrintWriter 사용법
@@ -40,7 +41,7 @@ public class MemberController {
             PrintWriter out = response.getWriter();
             out.println("<script> alert('비밀번호 숫자자리가 너무짧습니다 6자리이상으로 해주세요'); </script>");
             out.flush();
-            return "login.html";
+            return "register.html";
         }else{
             var hashing = passwordEncoder.encode(password);
             memberService.login(username,hashing,displayName);
@@ -49,5 +50,10 @@ public class MemberController {
         }
     }
 
-
+    @GetMapping("/login")
+    String login(){
+        var result = memberRepository.findAllByUsername("fsf");
+        System.out.println(result.get().getDisplayName());
+        return "login.html";
+    }
 }
