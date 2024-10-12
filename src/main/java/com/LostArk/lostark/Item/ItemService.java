@@ -1,5 +1,7 @@
 package com.LostArk.lostark.Item;
 
+import com.LostArk.lostark.Member.Member;
+import com.LostArk.lostark.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final MemberRepository memberRepository;
 
     public void saveItem(String title, Integer price){
         Item item = new Item();

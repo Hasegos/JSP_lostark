@@ -9,6 +9,9 @@
     <link href="/main.css" rel="stylesheet">
 </head>
 <body>
+<!-- 여기서 AJAX fetch()로 기능을 쓸거면 버튼안에다가 다 적어야됨!
+                 th 쓰면 타임리프 사용가능 / fetch() 만쓸꺼면 함수로 따로 뺴야됨!!
+                 AJAX를 이용해서 데이터를 보낼때는 "[[${데이터 명 뒤에 닫는건 똑같이" 이런식으로 작성해야됨 -->
 <div th:replace="~{ nav.html :: navbar}"></div>
     <div class="card" th:each="i : ${items}">
         <img src="https://placehold.co/300">
@@ -18,9 +21,6 @@
             <p th:text="${i.price}">7억</p>
             <!--해당 아이디값으로 이동-->
             <a th:href="@{/edit/{id}(id=${i.id})}">✏️</a>
-            <!-- 여기서 AJAX fetch()로 기능을 쓸거면 버튼안에다가 다 적어야됨! -->
-            <!-- th 쓰면 타임리프 사용가능 / fetch() 만쓸꺼면 함수로 따로 뺴야됨!! -->
-            <!-- AJAX를 이용해서 데이터를 보낼때는 [[${데이터 명}]] 이런식으로 작성해야됨-->
             <button id="delete" th:onclick="fetchDelete([[${i.id}]])">삭제버튼</button>
         </div>
     </div>

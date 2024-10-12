@@ -1,5 +1,6 @@
 package com.LostArk.lostark.Item;
 
+import com.LostArk.lostark.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +17,7 @@ public class ItemController {
 
     private final ItemRepository itemRepository; // 원하는 클래스에 repository등록
     private final ItemService itemService;
+
     /*  다른 방법 (constructor이용)
     @Autowired
     public ItemController(ItemReposiory itemReposiory) {
@@ -162,14 +164,11 @@ public class ItemController {
         return ResponseEntity.status(200).body("삭제완료");
     }
 
-
     @GetMapping("/test2")
     String test2(){
         var a = new BCryptPasswordEncoder().encode(" 문자~~");
         System.out.println(a);
         return  "redirect:/list";
     }
-
-
 }
 
